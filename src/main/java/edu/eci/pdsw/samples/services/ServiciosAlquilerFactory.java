@@ -11,6 +11,10 @@ import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 
 import static com.google.inject.Guice.createInjector;
+import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
+import edu.eci.pdsw.sampleprj.dao.ItemDAO;
+import edu.eci.pdsw.sampleprj.dao.mybatis.MyBATISClienteDAO;
+import edu.eci.pdsw.sampleprj.dao.mybatis.MyBATISItemDAO;
 
 
 /**
@@ -20,6 +24,7 @@ import static com.google.inject.Guice.createInjector;
 public class ServiciosAlquilerFactory {
 
     private static ServiciosAlquilerFactory instance = new ServiciosAlquilerFactory();
+    
 
     private static Injector injector;
 
@@ -30,7 +35,11 @@ public class ServiciosAlquilerFactory {
             @Override
             protected void initialize() {
                 setClassPathResource(pathResource);
+                bind(ItemDAO.class).to(MyBATISItemDAO.class);
+                bind(ClienteDAO.class).to(MyBATISClienteDAO.class);
                 bind(ServiciosAlquiler.class).to(ServiciosAlquilerItemsImpl.class);
+                
+                
             }
         });
     }
@@ -39,6 +48,7 @@ public class ServiciosAlquilerFactory {
 
         injector = myBatisInjector("mybatis-config.xml");
         testInjector = myBatisInjector("mybatis-config-h2.xml");
+       
     }
 
     public ServiciosAlquiler getServiciosAlquiler(){
