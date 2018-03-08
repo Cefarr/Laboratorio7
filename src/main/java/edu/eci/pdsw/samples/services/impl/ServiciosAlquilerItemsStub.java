@@ -223,12 +223,12 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
             mapaPrestamosPorIdCliente.remove(iditem);
         }
     }
-
+/**
     @Override
     public int valorMultaRetrasoxDia() {
         return MULTA_DIARIA;
     }
-
+*/
     
     
     
@@ -276,6 +276,11 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
         clientes.put(c2.getDocumento(), c2);
         clientes.put(c3.getDocumento(), c3);
 
+    }
+
+    @Override
+    public int valorMultaRetrasoxDia(int itemId) throws ExcepcionServiciosAlquiler {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

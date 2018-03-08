@@ -14,6 +14,10 @@ import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.sql.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static jdk.nashorn.internal.runtime.Debug.id;
+import static junit.runner.Version.id;
 
 /**
  * 
@@ -29,18 +33,28 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     private ClienteDAO daoCliente;
     
     @Override
-    public int valorMultaRetrasoxDia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int valorMultaRetrasoxDia(int itemId)throws ExcepcionServiciosAlquiler {
+        try {
+            return (int)daoItem.load(itemId).getTarifaxDia();
+        } catch (PersistenceException ex) {
+             throw new ExcepcionServiciosAlquiler("Error al consultar Cliente"+ itemId );
+        }
     }
 
     @Override
     public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoCliente.load((int)docu);
+        } catch (PersistenceException ex) {
+    
+            throw new ExcepcionServiciosAlquiler("Error al consultar Cliente"+ docu );
+        }
     }
 
     @Override
     public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //falta arreglar el mapper cliente y este y todos los demas metodos
+        return daoCliente.;
     }
 
     @Override

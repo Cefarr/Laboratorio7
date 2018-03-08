@@ -16,6 +16,7 @@ public class Main {
 
     public static void main(String a[]) throws ExcepcionServiciosAlquiler{
         System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarItem(2));
+        System.out.println("VER EL CLIENTE"+ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCliente(1684264984));
         System.exit(0);
     }
     

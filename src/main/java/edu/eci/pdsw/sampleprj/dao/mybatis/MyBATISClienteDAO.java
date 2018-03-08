@@ -12,6 +12,8 @@ import edu.eci.pdsw.sampleprj.dao.PersistenceException;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.entities.Item;
+import java.time.Instant;
+import java.util.Date;
 
 /**
  *
@@ -23,14 +25,13 @@ public class MyBATISClienteDAO implements ClienteDAO{
 
     @Override
     public void save(Cliente c) throws PersistenceException {
+        //clienteMapper.agregarItemRentadoACliente(0, c.getDocumento(), 0, Date.from(Instant.MIN), fechafin);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Cliente load(int id) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return clienteMapper.consultarCliente(id);    
     }
-
-    
     
 }

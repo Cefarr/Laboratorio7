@@ -1,6 +1,7 @@
 package edu.eci.pdsw.sampleprj.dao.mybatis.mappers;
 
 import edu.eci.pdsw.samples.entities.Cliente;
+import edu.eci.pdsw.samples.entities.Item;
 import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -32,5 +33,6 @@ public interface ClienteMapper {
      * @return x    
      */
     public List<Cliente> consultarClientes();
+    public List<Item> consultarItemCliente(@Param("idCLient")int idClinet);    
     
 }

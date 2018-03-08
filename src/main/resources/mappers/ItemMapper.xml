@@ -17,7 +17,7 @@
                  
                <select parameterType="map" id="consultarItem" resultMap="ItemResult">
                     select id,nombre,descripcion,fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id FROM VI_ITEMS
-                    where ITEMS_id =#{itemId}
+                    where id =#{itemId}
                  </select>
                 <resultMap type='Item' id='ItemResult'>
                     <id property='id' column='id'/>
