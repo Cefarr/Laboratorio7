@@ -54,7 +54,15 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     @Override
     public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
         //falta arreglar el mapper cliente y este y todos los demas metodos
-        return daoCliente.;
+        //select * from VI_ITEMRENTADO WHERE CLIENTES_documento=22
+        //select it.*  from VI_ITEMRENTADO tem  JOIN VI_ITEMS it where tem.CLIENTES_documento=22
+        try {
+            return daoItem.loadItemByCLient((int) idcliente);
+        } catch (PersistenceException ex) {
+    
+            throw new ExcepcionServiciosAlquiler("Error al consultar el item del Cliente"+ idcliente );
+        }
+        
     }
 
     @Override

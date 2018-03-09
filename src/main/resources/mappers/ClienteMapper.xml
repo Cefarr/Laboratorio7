@@ -10,10 +10,7 @@
                     where documento =#{idCli}
                  </select>
                  
-                <select parameterType="map" id="consultarItemCliente" resultMap="idCLient">
-                            select nombre, documento, telefono, direccion, email, vetado FROM VI_ITEMRENTADO 
-                    where documento =#{idCli}
-                 </select>
+
                  
                 <insert id ="agregarItemRentadoACliente" useGeneratedKeys="true" keyProperty="idItemRen">
                             

@@ -12,8 +12,10 @@ import edu.eci.pdsw.sampleprj.dao.PersistenceException;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.entities.TipoItem;
 import java.sql.SQLException;
+import java.util.List;
 
 
 
@@ -48,5 +50,12 @@ public class MyBATISItemDAO implements ItemDAO{
         
         
     }
+    
+    @Override
+    public List<ItemRentado> loadItemByCLient(int id) throws PersistenceException {
+        return itemMapper.consultarItemCliente(id);
+            
+    }
+    
     
 }

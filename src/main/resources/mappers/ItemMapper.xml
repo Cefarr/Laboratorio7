@@ -14,6 +14,9 @@
                     select id,nombre,descripcion,fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id FROM VI_ITEMS 
                    
                  </select>
+                                 <select parameterType="map" id="consultarItemCliente" resultMap="ItemResult">
+                            select it.*  from VI_ITEMRENTADO tem  JOIN VI_ITEMS it where tem.CLIENTES_documento =#{idCLient}
+                 </select>
                  
                <select parameterType="map" id="consultarItem" resultMap="ItemResult">
                     select id,nombre,descripcion,fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id FROM VI_ITEMS
