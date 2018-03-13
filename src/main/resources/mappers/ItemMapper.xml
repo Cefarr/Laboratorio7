@@ -14,13 +14,17 @@
                     select id,nombre,descripcion,fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id FROM VI_ITEMS 
                    
                  </select>
-                                 <select parameterType="map" id="consultarItemCliente" resultMap="ItemResult">
-                            select it.*  from VI_ITEMRENTADO tem  JOIN VI_ITEMS it where tem.CLIENTES_documento =#{idCLient}
+                 <select parameterType="map" id="consultarItemCliente" resultMap="ItemRentadoResult">
+                            select *  from VI_ITEMRENTADO  where CLIENTES_documento =#{idCLient}
                  </select>
                  
                <select parameterType="map" id="consultarItem" resultMap="ItemResult">
                     select id,nombre,descripcion,fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id FROM VI_ITEMS
                     where id =#{itemId}
+                 </select>
+                 
+                 <select parameterType="map" id="consultarItemDis" resultMap="ItemResult">
+                     SELECT * FROM VI_ITEMS WHERE id NOT IN (SELECT ITEMS_id FROM VI_ITEMRENTADO)
                  </select>
                 <resultMap type='Item' id='ItemResult'>
                     <id property='id' column='id'/>
@@ -31,6 +35,12 @@
                     <result property='formatoRenta' column='formatorenta'/>
                     <result property='genero' column='genero'/>  
                     <association property="tipo" javaType="TipoItem"></association>                    
+                </resultMap>
+                <resultMap type='ItemRentado' id='ItemRentadoResult'>
+                    <id property='id' column='id'/>
+                    <result property='fechainiciorenta' column='fechainiciorenta'/>
+                    <result property='fechafinrenta' column='fechainiciorenta'/> 
+                    <association property="item" javaType="Item"></association>                    
 
                 </resultMap>
     

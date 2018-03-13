@@ -9,7 +9,9 @@
                             select nombre, documento, telefono, direccion, email, vetado FROM VI_CLIENTES 
                     where documento =#{idCli}
                  </select>
-                 
+                <select parameterType="map" id="loadItemClien" resultMap="ItemRentadoResult">
+                            select * FROM VI_ITEMRENTADO where ITEMS_id=#{idItem}
+                 </select>                 
 
                  
                 <insert id ="agregarItemRentadoACliente" useGeneratedKeys="true" keyProperty="idItemRen">

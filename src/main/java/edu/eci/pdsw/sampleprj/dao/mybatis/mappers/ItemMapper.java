@@ -20,5 +20,6 @@ public interface ItemMapper {
     
     public void insertarItem(@Param ("item")Item it);
     public List<ItemRentado> consultarItemCliente(@Param("idCLient")int idClinet);    
+    public List<Item> consultarItemDis();    
         
 }

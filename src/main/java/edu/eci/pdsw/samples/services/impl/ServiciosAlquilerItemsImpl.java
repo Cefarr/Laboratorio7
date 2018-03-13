@@ -13,6 +13,8 @@ import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +28,9 @@ import static junit.runner.Version.id;
 @Singleton
 public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
+    
+    private static final int mula_Diaria=5000;
+    
     @Inject
     private ItemDAO daoItem;
         
@@ -67,7 +72,12 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoCliente.loadClient();
+        } catch (PersistenceException ex) {
+    
+            throw new ExcepcionServiciosAlquiler("Error al consultar el item del Cliente");
+        }
     }
 
     @Override
@@ -80,23 +90,60 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     }
 
     @Override
-    public List<Item> consultarItemsDisponibles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public List<Item> consultarItemsDisponibles() throws ExcepcionServiciosAlquiler{
+        try {
+            return daoItem.consultarItemDis();
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar el item ");
+      
+                  }
+        }
 
     @Override
     public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            long mulTotal=0;
+            ItemRentado r=daoCliente.loadItemCliente(iditem);
+            if(r==null){
+                throw new ExcepcionServiciosAlquiler("EL Item no esta agregado");
+            }else{
+                LocalDate fechMinEntrega=r.getFechafinrenta().toLocalDate();
+                LocalDate fechEntrega=fechaDevolucion.toLocalDate();
+                long dRetraso=ChronoUnit.DAYS.between(fechMinEntrega,fechEntrega);
+                
+                if(dRetraso>0){
+                    mulTotal=dRetraso*mula_Diaria;
+                }            
+            }
+            return mulTotal;
+
+        }catch(PersistenceException ex){
+            throw new ExcepcionServiciosAlquiler("EL alquiler del item no pudo ser revisado", ex);
+           
+        }
+        
+        
+        
+        
     }
 
     @Override
     public TipoItem consultarTipoItem(int id) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        try {
+        return daoItem.consultTipItem(id);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar el item ");
+      
+                  }
     }
-
     @Override
     public List<TipoItem> consultarTiposItem() throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return daoItem.consultTipItems();
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar los item ");
+                  }
     }
 
     @Override
@@ -133,7 +180,4 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
     public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
 }

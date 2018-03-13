@@ -34,6 +34,7 @@ public interface ClienteMapper {
      * @return x    
      */
     public List<Cliente> consultarClientes();
+    public ItemRentado loadItemClien(@Param("idItem") int id);
     
     
 }

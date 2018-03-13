@@ -19,6 +19,8 @@ public interface ClienteDAO {
     public void save(Cliente c) throws PersistenceException;
     
     public Cliente load(int id) throws PersistenceException;
+    public List<Cliente> loadClient() throws PersistenceException ;
+    public ItemRentado loadItemCliente(int id)throws PersistenceException ;
     
  
     

@@ -35,6 +35,17 @@ public class MyBATISClienteDAO implements ClienteDAO{
     public Cliente load(int id) throws PersistenceException {
         return clienteMapper.consultarCliente(id);    
     }
+    @Override
+    public List<Cliente> loadClient() throws PersistenceException {
+        return clienteMapper.consultarClientes();
+        
+    }
+
+    @Override
+    public ItemRentado loadItemCliente(int id) throws PersistenceException {
+        return clienteMapper.loadItemClien(id);
+       
+    }
 
     
 }

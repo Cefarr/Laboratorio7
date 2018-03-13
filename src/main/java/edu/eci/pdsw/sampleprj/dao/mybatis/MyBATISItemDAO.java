@@ -12,6 +12,7 @@ import edu.eci.pdsw.sampleprj.dao.PersistenceException;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper;
 import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.entities.TipoItem;
 import java.sql.SQLException;
@@ -26,7 +27,10 @@ import java.util.List;
 public class MyBATISItemDAO implements ItemDAO{
 
     @Inject
-    private ItemMapper itemMapper;    
+    private ItemMapper itemMapper; 
+    
+    @Inject
+    private TipoItemMapper tipoMapper;
         
     @Override
     public void save(Item it) throws PersistenceException{
@@ -55,6 +59,22 @@ public class MyBATISItemDAO implements ItemDAO{
     public List<ItemRentado> loadItemByCLient(int id) throws PersistenceException {
         return itemMapper.consultarItemCliente(id);
             
+    }
+
+    @Override
+    public List<Item> consultarItemDis() throws PersistenceException {
+        return itemMapper.consultarItemDis();
+    }
+
+    @Override
+    public List<TipoItem> consultTipItems() throws PersistenceException {
+        return tipoMapper.consultTipItems();
+        
+    }
+    
+    @Override
+    public TipoItem consultTipItem(int id) throws PersistenceException {
+        return tipoMapper.consultTipItem(id);
     }
     
     
