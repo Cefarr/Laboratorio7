@@ -13,12 +13,22 @@
                             select * FROM VI_ITEMRENTADO where ITEMS_id=#{idItem}
                  </select>                 
 
-                 
-                <insert id ="agregarItemRentadoACliente" useGeneratedKeys="true" keyProperty="idItemRen">
-                            
+                 <select id="getNetval" resultType="int">
+                     SELECT IFNULL(MAX(ID)+1, 0) FROM VI_ITEMRENTADO;
+                     
+                 </select> 
+                <insert id ="agregarItemRentadoACliente" useGeneratedKeys="true" keyProperty="idItemRen">                         
                     insert into VI_ITEMRENTADO (id,CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta) VALUES (#{idItemRen},#{idCli},#{idItem},#{fecIni},#{fecFin})
-
                 </insert>
+                <insert parameterType="map" id ="agregarCliente" >
+                            
+                    insert into VI_CLIENTES (documento,nombre,telefono,direccion,email,vetado) VALUES (#{idCie},#{name},#{tel},#{direc},#{emal},0)
+
+                </insert>                
+
+                <select parameterType="map" id="vetarCliente" resultMap="ClienteResult">
+                            update VI_CLIENTES SET vetado=1 where documento =#{idClient}
+                 </select>
     
     
                 <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">

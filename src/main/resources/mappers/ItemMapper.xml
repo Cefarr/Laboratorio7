@@ -18,6 +18,10 @@
                             select *  from VI_ITEMRENTADO  where CLIENTES_documento =#{idCLient}
                  </select>
                  
+                 <select parameterType="map" id="devolucion" resultMap="ItemRentadoResult">
+                            DELETE FROM VI_ITEMRENTADO WHERE ITEMS_id=#{idItem};
+                 </select>
+                 
                <select parameterType="map" id="consultarItem" resultMap="ItemResult">
                     select id,nombre,descripcion,fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id FROM VI_ITEMS
                     where id =#{itemId}

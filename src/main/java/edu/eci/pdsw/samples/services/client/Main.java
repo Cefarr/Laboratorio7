@@ -5,11 +5,17 @@
  */
 package edu.eci.pdsw.samples.services.client;
 
+import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquilerFactory;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,9 +49,15 @@ public class Main {
             System.out.println("Miremos los tipos"+tr.getDescripcion());
         
         }
+        TipoItem tp=new TipoItem(12, "Las cosas de la vida");
+        Item qqq=new Item(tp, 119090, "Algo", "Algo sobre algo", Date.from(Instant.EPOCH), 2000,"DVD", "pARA TODOS");
         
-        
-        
+        Cliente p=new Cliente ("Erick",11039, "222121", "Calle 1","Erick@loca.com");
+        //ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().registrarCliente(p); FUnciona pero para que no moleste x duplicados
+        //ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().registrarAlquilerCliente(java.sql.Date.valueOf(LocalDate.of(2018, Month.JUNE, 12)), p.getDocumento(), qqq, 20);
+        //ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().registrarDevolucion(0);
+        //ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().registrarItem(qqq);
+        ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().vetarCliente(22, true);
         System.exit(0);
     }
     

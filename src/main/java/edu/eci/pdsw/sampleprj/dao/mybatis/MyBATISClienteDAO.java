@@ -27,8 +27,8 @@ public class MyBATISClienteDAO implements ClienteDAO{
 
     @Override
     public void save(Cliente c) throws PersistenceException {
-        //clienteMapper.agregarItemRentadoACliente(0, c.getDocumento(), 0, Date.from(Instant.MIN), fechafin);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        clienteMapper.agregarCliente(c.getDocumento(),c.getNombre(),c.getTelefono(),c.getDireccion(),c.getEmail(),c.isVetado());
+        
     }
 
     @Override
@@ -47,5 +47,15 @@ public class MyBATISClienteDAO implements ClienteDAO{
        
     }
 
+    @Override
+    public void registroAlquilerCliente(long clienteDocumen, int idReg, Date fechainicioRenta, Date fechafinrenta) throws PersistenceException {
+           int iditem=clienteMapper.getNetval();
+            clienteMapper.agregarItemRentadoACliente(iditem,(int)clienteDocumen, idReg, fechainicioRenta, fechafinrenta); 
+    }
+
+    @Override
+    public void vetarCliente(long id) throws PersistenceException {
+        clienteMapper.vetarCliente((int)id);
+    }
     
 }

@@ -13,6 +13,7 @@ import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.sql.Date;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -148,17 +149,33 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            LocalDate fechinic=date.toLocalDate();
+            LocalDate fechfin=fechinic.plusDays(numdias);
+            Date fechini1=Date.valueOf(fechinic);
+            Date fecfin=Date.valueOf(fechfin);
+            daoCliente.registroAlquilerCliente(docu, item.getId(), fechini1,fecfin);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al registral el alquiler del cliente "+ docu,ex);
+                  }        
+        
     }
 
     @Override
     public void registrarCliente(Cliente p) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoCliente.save(p);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al registrar al cliente");
+                  }
     }
-
     @Override
     public void registrarDevolucion(int iditem) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoItem.devolucion(iditem);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al registrar al registrar la devolucion");
+                  }
     }
 
     @Override
@@ -173,11 +190,20 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoItem.save(i);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al registrar al registrar un item");
+                  }
     }
 
     @Override
     public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            daoCliente.vetarCliente(docu);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al registrar al vetar al cliente");
+                  }
+        
     }
 }

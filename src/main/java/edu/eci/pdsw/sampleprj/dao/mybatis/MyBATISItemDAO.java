@@ -76,6 +76,11 @@ public class MyBATISItemDAO implements ItemDAO{
     public TipoItem consultTipItem(int id) throws PersistenceException {
         return tipoMapper.consultTipItem(id);
     }
+
+    @Override
+    public void devolucion(int itemid) throws PersistenceException {
+        itemMapper.devolucion(itemid);
+    }
     
     
 }

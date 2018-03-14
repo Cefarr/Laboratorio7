@@ -23,5 +23,6 @@ public interface ItemDAO {
     public List<Item> consultarItemDis()throws PersistenceException;
     public List<TipoItem> consultTipItems()throws PersistenceException;
     public TipoItem consultTipItem(int id)throws PersistenceException;
+    public void devolucion(int itemid)throws PersistenceException;
     
 }
