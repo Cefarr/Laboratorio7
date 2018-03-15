@@ -58,6 +58,8 @@ public class Main {
         //ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().registrarDevolucion(0);
         //ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().registrarItem(qqq);
         ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().vetarCliente(22, true);
+        //System.out.println("MIREMOS EL VALOR"+ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCostoAlquiler(119090, 9));
+        ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().actualizarTarifaItem(1, 100000);
         System.exit(0);
     }
     

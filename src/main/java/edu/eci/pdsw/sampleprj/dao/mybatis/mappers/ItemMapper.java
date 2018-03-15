@@ -23,5 +23,6 @@ public interface ItemMapper {
     public List<ItemRentado> consultarItemCliente(@Param("idCLient")int idClinet);    
     public List<Item> consultarItemDis();  
     public void devolucion(@Param("idItem") int itemid);
+    public void actualizarTarifaItem(@Param ("idTem")long idItem, @Param ("tar")int tarifa);
         
 }

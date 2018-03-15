@@ -24,5 +24,7 @@ public interface ItemDAO {
     public List<TipoItem> consultTipItems()throws PersistenceException;
     public TipoItem consultTipItem(int id)throws PersistenceException;
     public void devolucion(int itemid)throws PersistenceException;
+    public long consultarTarifaxDia(long idItem)throws PersistenceException;
+    public void actualizarTarifaItem(long idItem, int tarifa)throws PersistenceException;
     
 }

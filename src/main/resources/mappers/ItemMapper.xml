@@ -30,6 +30,11 @@
                  <select parameterType="map" id="consultarItemDis" resultMap="ItemResult">
                      SELECT * FROM VI_ITEMS WHERE id NOT IN (SELECT ITEMS_id FROM VI_ITEMRENTADO)
                  </select>
+                 
+                 <select parameterType="map" id="actualizarTarifaItem" resultMap="ItemResult">
+                     update VI_ITEMS SET tarifaxdia=#{tar} where id =#{idTem};
+                 </select>                 
+                 
                 <resultMap type='Item' id='ItemResult'>
                     <id property='id' column='id'/>
                     <result property='nombre' column='nombre'/>
@@ -38,7 +43,7 @@
                     <result property='tarifaxDia' column='tarifaxdia'/> 
                     <result property='formatoRenta' column='formatorenta'/>
                     <result property='genero' column='genero'/>  
-                    <association property="tipo" javaType="TipoItem"></association>                    
+                    <association property="tipo" javaType="TipoItem" columnPrefix="ti_" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper.TipoItemResult"></association>                    
                 </resultMap>
                 <resultMap type='ItemRentado' id='ItemRentadoResult'>
                     <id property='id' column='id'/>

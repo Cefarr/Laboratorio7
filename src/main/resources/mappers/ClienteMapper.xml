@@ -75,10 +75,7 @@
                     <id property='id' column='id'/>
                     <result property='fechainiciorenta' column='fechainiciorenta'/>
                     <result property='fechafinrenta' column='fechafinrenta'/> 
-                    <association property="item" javaType="Item" columnPrefix='Item_'></association>      
-                </resultMap>
-                <resultMap type='Item' id="ItemResult">            
-                        <association  property="Item" resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'></association> 
+                    <association property="item" javaType="Item" columnPrefix='i_' resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'></association>      
                 </resultMap>
                 
                 <resultMap type='TipoItem' id='TipoItemResult'>

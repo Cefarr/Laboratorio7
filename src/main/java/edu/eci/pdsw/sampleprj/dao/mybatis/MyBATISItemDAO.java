@@ -81,6 +81,23 @@ public class MyBATISItemDAO implements ItemDAO{
     public void devolucion(int itemid) throws PersistenceException {
         itemMapper.devolucion(itemid);
     }
+
+    @Override
+    public long consultarTarifaxDia(long idItem) throws PersistenceException {
+        
+        Item item=itemMapper.consultarItem((int)idItem);
+        long rta=0;
+        if(item!=null){
+            rta= item.getTarifaxDia();
+        }
+        return rta;
+
+    }
+
+    @Override
+    public void actualizarTarifaItem(long idItem, int tarifa) throws PersistenceException {
+        itemMapper.actualizarTarifaItem(idItem, tarifa);
+    }
     
     
 }

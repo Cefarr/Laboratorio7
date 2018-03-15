@@ -180,12 +180,25 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        long resp=0;
+        try {
+            resp=daoItem.consultarTarifaxDia(iditem)*numdias;
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosAlquilerItemsImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resp;
+        
     }
 
     @Override
     public void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        try {
+            daoItem.actualizarTarifaItem(id,(int)tarifa);
+        } catch (PersistenceException ex) {
+            throw new ExcepcionServiciosAlquiler("Error al registrar al cliente");
+                  }      
+        
     }
 
     @Override
