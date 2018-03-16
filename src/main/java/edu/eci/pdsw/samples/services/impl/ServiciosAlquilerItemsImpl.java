@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static jdk.nashorn.internal.runtime.Debug.id;
 import static junit.runner.Version.id;
+import org.mybatis.guice.transactional.Transactional;
 
 /**
  * 
@@ -146,7 +147,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
             throw new ExcepcionServiciosAlquiler("Error al consultar los item ");
                   }
     }
-
+    @Transactional
     @Override
     public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
         try {
@@ -160,7 +161,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
                   }        
         
     }
-
+    @Transactional
     @Override
     public void registrarCliente(Cliente p) throws ExcepcionServiciosAlquiler {
         try {
@@ -169,6 +170,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
             throw new ExcepcionServiciosAlquiler("Error al registrar al cliente");
                   }
     }
+    @Transactional
     @Override
     public void registrarDevolucion(int iditem) throws ExcepcionServiciosAlquiler {
         try {
@@ -189,7 +191,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
         return resp;
         
     }
-
+    @Transactional
     @Override
     public void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
         
@@ -200,7 +202,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
                   }      
         
     }
-
+    @Transactional
     @Override
     public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
         try {
@@ -209,7 +211,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
             throw new ExcepcionServiciosAlquiler("Error al registrar al registrar un item");
                   }
     }
-
+    @Transactional
     @Override
     public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
         try {
@@ -219,4 +221,5 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
                   }
         
     }
+
 }
